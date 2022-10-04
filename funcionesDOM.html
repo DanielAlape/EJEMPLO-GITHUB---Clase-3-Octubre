@@ -1,0 +1,225 @@
+<!--
+    CLASE 28 DE SEPTIEMBRE - FUNCIONES Y (DOM) EN JS - HTML
+-->
+
+<html>
+
+<head>
+    <title>Funciones/Métodos - DOM/HTML</title>
+    <meta charset="utf-8" content="Ejemplo de Funciones y DOM con javascript">
+</head>
+
+<body>
+    <h3>Funciones y/o Métodos</h3>
+
+    <p>
+        Al igual que en todos los lenguajes, hay 4 tipos de funciones:
+
+    <ul>
+        <li>Retornan datos, reciben parámetros</li>
+        <li>Retornan datos, no reciben parámetros</li>
+        <li>No retornan datos, reciben parámetros</li>
+        <li>No retornan datos, no reciben parámetros</li>
+    </ul>
+
+    En javascript para trabajar funciones se de usar la palabra clave "function"
+
+    <h4>Retornan datos, reciben parámetros</h4>
+
+    function nombreFunción(parámetros){<br>
+    &nbsp;&nbsp;&nbsp;Bloque de Código; <br>
+    &nbsp;&nbsp;&nbsp;return valor; <br>
+    }
+
+    <h4>Retornan datos, no reciben parámetros</h4>
+
+    function nombreFunción(){<br>
+    &nbsp;&nbsp;&nbsp;Bloque de Código; <br>
+    &nbsp;&nbsp;&nbsp;return valor; <br>
+    }
+
+    <h4>No retornan datos, reciben parámetros</h4>
+
+    function nombreFunción(parámetros){<br>
+    &nbsp;&nbsp;&nbsp;Bloque de Código; <br>
+    }
+
+    <h4>No retornan datos, no reciben parámetros</h4>
+
+    function nombreFunción(){<br>
+    &nbsp;&nbsp;&nbsp;Bloque de Código; <br>
+    }
+
+    <h4>Ejemplos: <font color="red">ver código fuente para ver los ejemplos</font>
+    </h4>
+
+    <script type="text/javascript">
+
+        // Retornan datos, reciben parámetros:
+
+        function calcular(par1, par2) {
+            let suma = par1 + par2; // Dense cuenta que aquí no se declara el tipo de dato que son los parámetros
+            return suma;
+        }
+
+        let num1 = 8, num2 = 4, resultado = 0;
+        resultado = calcular(num1, num2); // Se llama a la función enviandole dos parámetros. 
+        // "resultado" es igual al valor que retorne esta función
+        alert("Resultado de la suma: " + resultado);
+
+        // Retornan datos, no reciben parámetros:
+
+        function calcular2() { // La función no recibe parámetros
+            let producto, numero1 = 5; numero2 = 3;
+            producto = numero1 * numero2;
+            return producto;
+        }
+        alert("Resultado del producto: " + calcular2());
+
+        // No retornan datos, reciben parámetros:
+
+        function imprimir(mensaje) {
+            alert("Resultado: " + mensaje);
+        }
+        alert("Colombia 3 - México 2");
+
+        // No retornan datos, no reciben parámetros:
+
+        function calcular3() {
+            let n1 = 10, n2 = 5;
+            alert("Resultado de la división")
+        }
+        calcular3();
+
+    </script>
+
+    <h4>Ejercicio factorial</h4>
+    <p>
+        Hacer un algoritmo en javascript que calcule el factorial de un número. Tanto el cálculo, la solicitud del
+        número
+        como la impresion del resultado se debe programar aplicando funciones.
+    </p>
+
+    <script>
+        // Solución ejercicio factorial:
+
+        function solicitar() {
+            x = parseInt(prompt("Digite un número para hallar el factorial: "));
+            return x;
+        }
+        function calcularFac(num) {
+            if (num == 0) {
+                return 1;
+            }
+            else if (num < 0) {
+                return "No existe";
+            }
+            return num * calcularFac(num - 1);
+        }
+        function impresion(result) {
+            alert("El factorial del número es: " + result);
+        }
+        factorial = calcularFac(solicitar());
+        impresion(factorial);
+
+    </script>
+    </p>
+
+    <h3>DOM</h3>
+    <p>
+        Las páginas web (o documentos web) contienen elementos HTML (tags HTML) jerárquicamente distribuidos, a
+        estos elementos se le conocen como nodos, conformando el Document Objects Model (Modelo de Objetos del
+        documento). Ejemplo: <br><br>
+        <img src="img/slide_domExample_browser.png" width="600px"><br><br>
+
+        Mediante javascript se puede realizar cambios a la estructura del DOM de la página, usando la instrucción
+        "document": <br>
+
+        <!-- EJEMPLO DOM: -->
+    <div id="nuevo"></div>
+
+    <script type="text/javascript">
+        var nodoParrafo = document.createElement("p"); // Creo el elemento HTML "p" de PARRAFO, el cual se guarda en la variable "nodoParrafo" 
+        var textNodo = document.createTextNode("Esto es el texto que irá dentro del parrafo!!!"); // Creo otro elemento HTML de texto, el cual se...
+        // guarda en la variable "textNodo"   
+
+        nodoParrafo.appendChild(textNodo); /* El elemento HTML de texto lo agrego al elemento HTML "nodoParrafo"
+                                            Esto significa que "textNodo" es el texto y el HIJO de "nodoParrafo"
+                                            En este contexto, cuando decimos que es su hijo, estamos diciendo que...
+                                            "textNodo" desciende de "nodoParrafo", es decir, que es un elemento HTML (nodo) que pertenece a otro (nodo)
+                                           */
+        var elementoDiv = document.getElementById('nuevo'); // Aquí creamos una variable la cual toma al contenedor (nodo) <div> con ID "nuevo" y luego...
+
+        elementoDiv.appendChild(nodoParrafo); // Y le agrega el hijo "nodoParrafo"
+                                              /* Es decir que en el nodo "elementoDiv" estará el nodo "nodoParrado".
+           y en el nodo "nodoParrafo" estará el nodo "textNodo"
+        */
+        // En otras palabras, en un contenedor creamos un párrafo a través de DOM
+    </script>
+    <style>
+        /* Esto lo creamos para comprobar si realmente creamos un párrafo */
+        p {
+            background-color: aqua;
+            /* De ser así, el párrafo tendra un fondo de este color */
+        }
+    </style>
+
+    <h3>Cargar o generar HTML</h3>
+
+    <p>
+        Con javascript se puede generar o cargar dentro de un documento web un nuevo HTML o uno existente, mediante la
+        instrucción innerHTML: <br><br>
+
+    <div id="nuevo2"></div> <!-- En este contenedor se cargará o creará el HTML -->
+
+    <form id="INN"><input type="button" value="Cargar HTML" onclick="javascript:cargar();"></form>
+    <!-- El botón llama a la función "cargar()"-->
+
+    <script type="text/javascript">
+        function cargar() {
+            document.getElementById('nuevo2').innerHTML = "<object type='text/html' data='ciclos.html'></object>";
+            /* Aquí creamos un objeto tipo html referenciando al documento con el nombre "ciclos.html"
+               Es necesario aclarar, que cuando se llame a este HTML, se cargarán todos los elementos
+               que contenga, incluyendo ejercicios, salidas, entradas, ventanas emergentes, etc 
+            */
+        }
+    </script>
+
+    <h2>Ejercicio HTML en navegador con factorial</h2>
+
+    Para el ejercicio del factorial, imprima el resultado en una nueva etiqueta parráfo generada desde el
+    script.
+
+    <!-- Solución -->
+
+    <div id="nuevo3"></div> <!-- En este contenedor se pondrá el párrafo con el resultado del factorial -->
+
+    <script type="text/javascript">
+        
+        function factorialRecursivo(n) {
+            if (n == 0) {
+                return 1;
+            }
+            else if (n < 0) {
+                return "No existe";
+            }
+            return n * factorialRecursivo(n - 1);
+        }
+
+        let factorial, num = 5;
+        factorial = factorialRecursivo(num);
+
+        var nodoParrafo = document.createElement("p");
+        var textNodo = document.createTextNode("El factorial del numero 5 es:" + factorial);
+
+        nodoParrafo.appendChild(textNodo);
+
+        var elementoDiv = document.getElementById('nuevo3');
+
+        elementoDiv.appendChild(nodoParrafo);
+    </script>
+
+    </p>
+</body>
+
+</html>
